@@ -1,0 +1,122 @@
+﻿table Customers
+	lineageTag: 26abb2f9-033b-4c0c-9554-693aeded182c
+
+	column Address
+		dataType: String
+		lineageTag: 1f4a7b80-9095-40b3-aa8a-8ad0a9ede094
+		summarizeBy: None
+		sourceColumn: Address
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: Int64
+		formatString = 0
+		lineageTag: 5f25b5d8-49bd-4419-a937-57f219dd048d
+		summarizeBy: None
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column Birthday
+		dataType: DateTime
+		formatString = General Date
+		lineageTag: 9985ea9d-7be9-471c-8a5f-31fc9778ebc3
+		summarizeBy: None
+		sourceColumn: Birthday
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: String
+		lineageTag: 3b7afc9a-03de-4b1d-9536-70685796f3ec
+		summarizeBy: None
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: String
+		lineageTag: 8fd0e5ad-cb39-43f0-aa9e-d024644e0cd9
+		summarizeBy: None
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Country Code'
+		dataType: String
+		lineageTag: afd5e4e8-0146-40eb-9657-305585c18606
+		summarizeBy: None
+		sourceColumn: Country Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: String
+		lineageTag: 351ced4f-4bb0-481b-9186-c9cd928689f6
+		summarizeBy: None
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: Int64
+		isHidden
+		formatString = 0
+		lineageTag: 024df1b9-619c-474e-b835-325aa92047cd
+		summarizeBy: None
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: String
+		lineageTag: 810f6ce2-2c5d-43ad-990b-3f38ddfab122
+		summarizeBy: None
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: String
+		lineageTag: 9c582fb7-6041-4768-b190-a6994894a84b
+		summarizeBy: None
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'State Code'
+		dataType: String
+		lineageTag: edff3fee-ca29-47d0-ba2c-22f7e82846c7
+		summarizeBy: None
+		sourceColumn: State Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: String
+		lineageTag: 042b0529-b1de-45b0-b67c-5887c640d09a
+		summarizeBy: None
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Zip Code'
+		dataType: String
+		lineageTag: 2b15b4f1-466c-441f-9d43-2c2415b10934
+		summarizeBy: None
+		sourceColumn: Zip Code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customers-cb73ef19-f37f-477d-88a3-93c99bf41d7c = M
+		mode: Import
+		expression =
+			let
+			    Source = Sql.Database(#"[SQL Server]", #"[SQL Database]"),
+			    dbo_Customer = Source{[Schema=#"[SQL Schema]",Item="Customer"]}[Data]
+			in
+			    dbo_Customer
+

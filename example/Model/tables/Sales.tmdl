@@ -1,0 +1,176 @@
+﻿table Sales
+	lineageTag: 2edce7d4-e330-4124-9b9d-54592a21cbc5
+
+	measure Margin = [Sales Amount] - [Total Cost]
+		formatString = "$"#,0
+		lineageTag: a1fb57c8-2e4f-46e0-b852-52bbfa36c27a
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Sales Amount' = SUMX ( Sales, Sales[Quantity] * Sales[Net Price] )
+		formatString = "$"#,0
+		lineageTag: 2023421f-a179-4b4a-aa5c-f734b161a609
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Sales Quantity' = SUM ( Sales[Quantity] )
+		formatString = #,##0
+		lineageTag: 32eff209-b170-48e0-854d-e7a37f25af6f
+
+	measure 'Total Cost' = SUMX ( Sales, Sales[Quantity] * Sales[Unit Cost] )
+		formatString = "$"#,0
+		lineageTag: 1ac161f4-1701-49a6-aa84-6e4929e8c515
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column 'Currency Code'
+		dataType: String
+		lineageTag: d94d5f21-5c27-4fd7-840e-bb5c9e0a46c1
+		summarizeBy: None
+		sourceColumn: Currency Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: Int64
+		isHidden
+		formatString = 0
+		lineageTag: 30953699-9f4f-488e-9777-66bb37551a51
+		summarizeBy: None
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Date'
+		dataType: DateTime
+		formatString = Long Date
+		lineageTag: 5b05ceab-5d84-4562-b9cc-8be882ee339e
+		summarizeBy: None
+		sourceColumn: Delivery Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Exchange Rate'
+		dataType: Double
+		lineageTag: 47bbf1e8-1bc9-4111-9f87-98f1226ffd50
+		summarizeBy: None
+		sourceColumn: Exchange Rate
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Line Number'
+		dataType: Int64
+		formatString = 0
+		lineageTag: d9cf9358-307e-40f8-82c9-b9fa0e029630
+		summarizeBy: None
+		sourceColumn: Line Number
+
+		annotation SummarizationSetBy = User
+
+	column 'Net Price'
+		dataType: Decimal
+		formatString = "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: 21b7198c-3652-47a1-bbb2-80f7dea1abf0
+		summarizeBy: None
+		sourceColumn: Net Price
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Order Date'
+		dataType: DateTime
+		formatString = Long Date
+		lineageTag: e8cff61a-d089-40bf-9268-126aaf8ede74
+		summarizeBy: None
+		sourceColumn: Order Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Order Number'
+		dataType: Int64
+		formatString = 0
+		lineageTag: e51f849b-11c0-4765-88e8-b2ee3d1fcd93
+		summarizeBy: None
+		sourceColumn: Order Number
+
+		annotation SummarizationSetBy = User
+
+	column ProductKey
+		dataType: Int64
+		isHidden
+		formatString = 0
+		lineageTag: ce79ec24-b5c1-420c-bb36-30614dc7f92f
+		summarizeBy: None
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: Int64
+		formatString = 0
+		lineageTag: 00e95d09-b58a-4459-be63-878e4f85ec05
+		summarizeBy: None
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = User
+
+	column StoreKey
+		dataType: Int64
+		isHidden
+		formatString = 0
+		lineageTag: 512c74c5-36a1-4aa0-bf10-ca6981064ae9
+		summarizeBy: None
+		sourceColumn: StoreKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Cost'
+		dataType: Decimal
+		formatString = "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: b901d1e5-b8c3-425a-8deb-a51ca55defff
+		summarizeBy: None
+		sourceColumn: Unit Cost
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Unit Price'
+		dataType: Decimal
+		formatString = "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: 662d789f-13ca-4af3-85cc-1339977ff423
+		summarizeBy: None
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	partition Sales-32897230-38d7-4a64-83fc-96d2d960fbfc = M
+		mode: Import
+		expression =
+			let
+			    Source = Sql.Database(#"[SQL Server]", #"[SQL Database]"),
+			    dbo_Sales = Source{[Schema=#"[SQL Schema]",Item="Sales"]}[Data]
+			in
+			    dbo_Sales
+

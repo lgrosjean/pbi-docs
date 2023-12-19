@@ -1,0 +1,153 @@
+﻿/// Date table
+table Date
+	lineageTag: b652a1bf-fdb7-4ad3-8777-296d363917f1
+	dataCategory: Time
+
+	column Date
+		dataType: DateTime
+		isKey
+		formatString = Long Date
+		lineageTag: 22f23f73-1e41-484a-9029-380bbeb66ca1
+		summarizeBy: None
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Day of Week Number'
+		dataType: Int64
+		formatString = 0
+		lineageTag: 8898b389-8e25-4c5b-bae5-35887bb038cc
+		summarizeBy: None
+		sourceColumn: Day of Week Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week Short'
+		dataType: String
+		lineageTag: e46b6891-e9bb-4251-9f6a-215bf68a2327
+		summarizeBy: None
+		sourceColumn: Day of Week Short
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Day of Week'
+		dataType: String
+		lineageTag: affe2a50-70cf-4250-b67f-95b103ea92fa
+		summarizeBy: None
+		sourceColumn: Day of Week
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		dataType: Int64
+		formatString = 0
+		lineageTag: 950b162b-3b5f-4844-b16c-3dce72536dc7
+		summarizeBy: None
+		sourceColumn: Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Short'
+		dataType: String
+		lineageTag: e006743b-56a1-4a16-9ee8-853358bbf892
+		summarizeBy: None
+		sourceColumn: Month Short
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: String
+		lineageTag: adf3c168-b71e-4448-8f25-b9393c079cc1
+		summarizeBy: None
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: String
+		lineageTag: 5da3f341-3ff4-4b53-a6b7-c708d938a235
+		summarizeBy: None
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Working Day Number'
+		dataType: Int64
+		formatString = 0
+		lineageTag: 6e6e6e18-0575-42ff-89f0-aeab712401d1
+		summarizeBy: None
+		sourceColumn: Working Day Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Working Day'
+		dataType: Boolean
+		formatString = "TRUE";"TRUE";"FALSE"
+		lineageTag: 278529cc-9f47-41c7-9c64-1853b445b6f0
+		summarizeBy: None
+		sourceColumn: Working Day
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Number'
+		dataType: Int64
+		formatString = 0
+		lineageTag: 3ce74208-479f-4d43-af2b-4d648306e7cc
+		summarizeBy: None
+		sourceColumn: Year Month Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Short'
+		dataType: String
+		lineageTag: c1441e20-87b7-475f-9df2-f6ed08ccccf2
+		summarizeBy: None
+		sourceColumn: Year Month Short
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month'
+		dataType: String
+		lineageTag: 05689a91-f508-42f2-83a1-61a2c13ab6e6
+		summarizeBy: None
+		sourceColumn: Year Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter Number'
+		dataType: Int64
+		formatString = 0
+		lineageTag: 316a0af4-287f-4ac9-83c8-c8e13b9f9484
+		summarizeBy: None
+		sourceColumn: Year Quarter Number
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Quarter'
+		dataType: String
+		lineageTag: 0793dc18-d2d8-4d45-8d33-e46594acc447
+		summarizeBy: None
+		sourceColumn: Year Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: Int64
+		formatString = 0
+		lineageTag: d70ce06f-9cc0-4b2e-813d-70d8d48d608b
+		summarizeBy: None
+		sourceColumn: Year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date-2e0b0d3f-f820-4d2d-b615-0616195a29f7 = M
+		mode: Import
+		expression =
+			let
+			    Source = Sql.Database(#"[SQL Server]", #"[SQL Database]"),
+			    dbo_Date = Source{[Schema=#"[SQL Schema]",Item="Date"]}[Data]
+			in
+			    dbo_Date
+

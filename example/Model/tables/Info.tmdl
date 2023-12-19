@@ -1,0 +1,93 @@
+﻿table Info
+	lineageTag: 70da6bba-5162-4cb4-8a19-07dcea31c08b
+
+	measure Branch = LOOKUPVALUE(Info[Text], Info[Label], "Branch")
+		lineageTag: 75e02801-e1b3-4efe-bfc4-8f733610a25a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Data Updated (UTC)' = LOOKUPVALUE(Info[Timestamp], Info[Label], "Data Updated")
+		formatString = dd-mmm-yyyy hh:mm
+		lineageTag: 1e52c787-aca7-4b79-9ccb-a5f8d08010ec
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	measure 'Dataset Version' = LOOKUPVALUE(Info[Text], Info[Label], "Version")
+		lineageTag: 9500d2d6-8c84-4e32-9a78-c3a622e6506a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Environment = LOOKUPVALUE(Info[Text], Info[Label], "Environment")
+		lineageTag: 50de8ef9-460d-4798-aa8f-4fdf1ff46936
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GitHub RunID' = LOOKUPVALUE(Info[Text], Info[Label], "GitHub RunID")
+		lineageTag: 39823704-6984-4576-a9cd-bfdeca91437b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GitHub SHA' = LOOKUPVALUE(Info[Text], Info[Label], "GitHub SHA")
+		lineageTag: 8d2d56be-f836-4c7a-81f8-fbf15bdd37fc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Label
+		dataType: String
+		isHidden
+		lineageTag: 3a50d991-bb75-4bc8-9934-84346b13458e
+		summarizeBy: None
+		sourceColumn: Label
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Text
+		dataType: String
+		isHidden
+		lineageTag: 5269cbfa-1657-4bf2-8cb7-7ea0ad16acfc
+		summarizeBy: None
+		sourceColumn: Text
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Timestamp
+		dataType: DateTime
+		isHidden
+		formatString = General Date
+		lineageTag: 5b61c35f-7d39-49b9-8e5f-cd004908cb20
+		summarizeBy: None
+		sourceColumn: Timestamp
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Info-f44d74ec-0372-4982-8ace-63656474683c = M
+		mode: Import
+		expression =
+			let
+			    Source = #table(type table
+			    [
+			        #"Label"             = text, 
+			        #"Timestamp"         = datetime,
+			        #"Text"              = text
+			    ], 
+			    {
+			        { "Data Updated", DateTimeZone.RemoveZone(DateTimeZone.UtcNow()), null },
+			        { "Version",            null,   #"[Version]" },
+			        { "GitHub SHA",         null,   #"[GH-SHA]" },
+			        { "GitHub RunID",       null,   #"[GH-RunId]" },
+			        { "Branch",             null,   #"[GH-Branch]" },
+			        { "pbi-tools Version",  null,   #"[PBITOOLS_VERSION]" },
+			        { "Environment",        null,   #"[Environment]"}
+			    }
+			)
+			in
+			    Source
+

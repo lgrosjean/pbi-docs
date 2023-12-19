@@ -1,0 +1,96 @@
+﻿table Stores
+	lineageTag: 05fdd779-edd3-41c7-aa98-2ed9d0047f54
+
+	column 'Close Date'
+		dataType: DateTime
+		formatString = Long Date
+		lineageTag: 63108690-1f14-481a-965b-1c8b452bcff3
+		summarizeBy: None
+		sourceColumn: Close Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Country
+		dataType: String
+		lineageTag: 8364310c-3984-440b-97cf-f0630b432eb2
+		summarizeBy: None
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Name
+		dataType: String
+		lineageTag: c57cc264-c22d-47f7-9c4d-8f19bfe2c821
+		summarizeBy: None
+		sourceColumn: Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Open Date'
+		dataType: DateTime
+		formatString = Long Date
+		lineageTag: 91fb55cb-30ef-4f71-97d1-877d34087579
+		summarizeBy: None
+		sourceColumn: Open Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Square Meters'
+		dataType: Int64
+		formatString = 0
+		lineageTag: 5af7c682-2741-4cb4-a142-951c58babfae
+		summarizeBy: None
+		sourceColumn: Square Meters
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		dataType: String
+		lineageTag: b9c1b286-d4b9-452b-9f11-d6b31cc9c23b
+		summarizeBy: None
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: String
+		lineageTag: dfd5bef4-79ce-475a-a7d2-1d2d2b78f33c
+		summarizeBy: None
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Store Code'
+		dataType: Int64
+		formatString = 0
+		lineageTag: fe2c07dc-dcc2-4f1b-9a43-16aa7bda771e
+		summarizeBy: None
+		sourceColumn: Store Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreKey
+		dataType: Int64
+		isHidden
+		formatString = 0
+		lineageTag: 1771b084-ef7d-42aa-bc28-582670498961
+		summarizeBy: None
+		sourceColumn: StoreKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Stores-5c5c3747-772e-4093-9c70-d3f9dcd881fb = M
+		mode: Import
+		expression =
+			let
+			    Source = Sql.Database(#"[SQL Server]", #"[SQL Database]"),
+			    dbo_Store = Source{[Schema=#"[SQL Schema]",Item="Store"]}[Data]
+			in
+			    dbo_Store
+

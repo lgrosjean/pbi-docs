@@ -1,0 +1,159 @@
+﻿table Products
+	lineageTag: 6ec0743b-ef7f-4d8f-add9-8cc9e3b3df7e
+
+	column Brand
+		dataType: String
+		lineageTag: eca2dede-c34d-4b33-b4e7-ecff2a0e9db0
+		summarizeBy: None
+		sourceColumn: Brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Category Code'
+		dataType: String
+		isHidden
+		lineageTag: 564e268f-dcca-48bb-bb77-e39885ca10be
+		summarizeBy: None
+		sourceColumn: Category Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: String
+		lineageTag: ed38fa5a-41a5-451e-b14f-3e1519a8808a
+		summarizeBy: None
+		sourceColumn: Category
+		sortByColumn: 'Category Code'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Color
+		dataType: String
+		lineageTag: 2b4d61a5-2885-456f-a409-f6e104224c14
+		summarizeBy: None
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+	column Manufacturer
+		dataType: String
+		lineageTag: b5ddce68-442e-41a4-9f84-cc97b42a0a4d
+		summarizeBy: None
+		sourceColumn: Manufacturer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Code'
+		dataType: String
+		lineageTag: 3e558a17-c78b-45d4-83c3-92131651b723
+		summarizeBy: None
+		sourceColumn: Product Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Name'
+		dataType: String
+		lineageTag: e1a17df4-7694-4f58-8ca9-b9be664b0457
+		summarizeBy: None
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: Int64
+		isHidden
+		formatString = 0
+		lineageTag: bbd14333-d6d2-4b1b-a075-ce088a800a40
+		summarizeBy: None
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Subcategory Code'
+		dataType: String
+		isHidden
+		lineageTag: fb0ba11f-98b0-4e12-8da0-32c3c083d96c
+		summarizeBy: None
+		sourceColumn: Subcategory Code
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Subcategory
+		dataType: String
+		lineageTag: 5ffe6bed-4cd7-4477-8aee-9e9d2fa1e486
+		summarizeBy: None
+		sourceColumn: Subcategory
+		sortByColumn: 'Subcategory Code'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Cost'
+		dataType: Decimal
+		formatString = "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: b0e10fe6-3823-41f7-8229-a8873b72bca8
+		summarizeBy: None
+		sourceColumn: Unit Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Unit Price'
+		dataType: Decimal
+		formatString = "£"#,0.###############;-"£"#,0.###############;"£"#,0.###############
+		lineageTag: 6278c36e-4881-4dd8-92bb-92c5c0741efe
+		summarizeBy: None
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column 'Weight Unit Measure'
+		dataType: String
+		lineageTag: 410d2a61-3d73-4422-aa1b-aa68743629f3
+		summarizeBy: None
+		sourceColumn: Weight Unit Measure
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weight
+		dataType: Double
+		lineageTag: 18d5b148-0bff-4e36-ba1d-4e9f502391a1
+		summarizeBy: None
+		sourceColumn: Weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	hierarchy 'Products Hierarchy'
+		lineageTag: 6888e3c5-12a9-48a6-8f16-08ba9e69c77a
+
+		level Category
+			lineageTag: e1fbf815-b0ed-466a-a00b-a07b3416c5a3
+			column: Category
+
+		level Subcategory
+			lineageTag: 77ad5e0d-b0b3-4d94-b86a-4bbcb56be031
+			column: Subcategory
+
+	partition Products-b63b410f-9ddb-4a3a-bbcb-996ab12ce58c = M
+		mode: Import
+		expression =
+			let
+			    Source = Sql.Database(#"[SQL Server]", #"[SQL Database]"),
+			    dbo_Product = Source{[Schema=#"[SQL Schema]",Item="Product"]}[Data]
+			in
+			    dbo_Product
+

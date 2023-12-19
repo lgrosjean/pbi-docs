@@ -1,0 +1,38 @@
+﻿expression '[SQL Server]' = "pbitools-demo-01.database.windows.net" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: e6298aa0-8571-47f0-a389-a50c5b256cef
+	queryGroup: Parameters
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression '[SQL Database]' = "Contoso" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 6cdf0b71-842d-4cf9-911b-0643277b45ec
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+expression '[SQL Schema]' = "dbo" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 34b73998-9e7d-4e45-a875-f7b03eb32a12
+	queryGroup: Parameters
+
+	annotation PBI_ResultType = Text
+
+expression [Environment] = "ENVIRONMENT" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: ddbdd34e-ea2d-4521-81a1-92d945b52582
+
+expression [GH-Branch] = "GH-Branch" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c1f49751-4367-494f-ba3a-453d86491c05
+
+expression [GH-RunId] = "GH-RunId" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: c02c3091-0fb4-41cc-a04b-ead14a8bcbbe
+
+expression [GH-SHA] = "GH-SHA" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 01f005eb-6bb7-49b7-8d02-bae1593a572d
+
+expression [PBITOOLS_VERSION] = "PBITOOLS_VERSION" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 8d1e5ad7-44b0-4358-b714-74d1ca04d619
+
+expression [Version] = "VERSION" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: b2942f8e-2b73-460e-8ac1-b20e7e31c124
+

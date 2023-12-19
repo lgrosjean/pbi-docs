@@ -1,0 +1,64 @@
+﻿table 'Currency Exchange'
+	isHidden
+	lineageTag: d58d23c3-b31f-451c-8c3e-051b361d1175
+
+	column Date
+		dataType: DateTime
+		isHidden
+		formatString = Long Date
+		lineageTag: 920c92ea-01e0-450a-8f29-7b18e3778e66
+		summarizeBy: None
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Exchange
+		dataType: Double
+		isHidden
+		lineageTag: 2821a78d-2a36-43da-a9d4-86e0b4e298d3
+		summarizeBy: Sum
+		sourceColumn: Exchange
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FromCurrency
+		dataType: String
+		isHidden
+		lineageTag: 94329f3e-0907-4b54-932a-083844bcf912
+		summarizeBy: None
+		sourceColumn: FromCurrency
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ToCurrency
+		dataType: String
+		isHidden
+		lineageTag: d69fc9de-2b49-42f5-948b-87d4f1aede57
+		summarizeBy: None
+		sourceColumn: ToCurrency
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Currency Exchange-4e1e6929-107c-46cc-a092-d063b4d0192b' = M
+		mode: Import
+		expression =
+			let
+			    Source = Sql.Database(#"[SQL Server]", #"[SQL Database]"),
+			    #"dbo_Currency Exchange" = Source{[Schema=#"[SQL Schema]",Item="Currency Exchange"]}[Data]
+			in
+			    #"dbo_Currency Exchange"
+
+	changedProperty = IsHidden
+
