@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /App
 
 # Copy everything
-COPY pbi-docs.csproj pbi-docs.sln Program.cs ./
+COPY pbi-docs.csproj pbi-docs.sln Program.cs Serialize.cs ./
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release
