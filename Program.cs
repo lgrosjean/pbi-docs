@@ -28,10 +28,9 @@ class Program
 
         rootCommand.AddOption(docsFolderPathOption);
 
-        rootCommand.SetHandler((tmdlFolderPath, docsFolderPath) =>
-        {
-            DoRootCommand(tmdlFolderPath, docsFolderPath);
-        }, tmdlFolderPathArgument, docsFolderPathOption);
+        rootCommand.SetHandler(DoRootCommand, tmdlFolderPathArgument, docsFolderPathOption);
+
+        rootCommand.Add(Serializer.GetCommand(tmdlFolderPathArgument));
 
         await rootCommand.InvokeAsync(args);
     }
