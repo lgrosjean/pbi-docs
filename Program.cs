@@ -38,7 +38,6 @@ class Program
 
     public static void DoRootCommand(string tmdlFolderPath, string docsFolderPath)
     {
-        Console.WriteLine("Hello world!");
         Console.WriteLine($"<tmdlFolderPath> argument = {tmdlFolderPath}");
         Console.WriteLine($"<docsFolderPath> option = {docsFolderPath}");
 
@@ -60,6 +59,8 @@ class Program
 
         readmeMd.Root.Add(tablesBulletList);
 
+        AddRelationshipsMd(readmeMd, database);
+
         set.Save(docsFolderPath, cleanOutputDirectory: true);
     }
 
@@ -71,6 +72,36 @@ class Program
 
         return readmeMd;
     }
+
+
+    public static void AddRelationshipsMd(MdDocument readmeMd, Database database)
+    {
+        string mermaidStr = "";
+
+        /// TODO: add a "CreateMermaidMd method from a relationship which returns a string
+        foreach (SingleColumnRelationship relationship in database.Model.Relationships)
+        {
+            Table fromTable = relationship.FromTable;
+            Table toTable = relationship.ToTable;
+
+            Column fromColumn = relationship.FromColumn;
+            Column toColumn = relationship.ToColumn;
+
+            var fromCardinality = relationship.FromCardinality.ToString() == "One" ? "1" : "*";
+            var toCardinality = relationship.ToCardinality.ToString() == "One" ? "1" : "*";
+
+            mermaidStr += $"\n{fromTable.Name} \"{fromCardinality}\" --> \"{toCardinality}\" {toTable.Name}";
+        }
+
+        readmeMd.Root.Add(new MdHeading(2, "Relationships"));
+        readmeMd.Root.Add(new MdParagraph(
+            new MdRawMarkdownSpan("```mermaid\nclassDiagram\n"),
+            new MdRawMarkdownSpan(mermaidStr),
+            new MdRawMarkdownSpan("\n```")
+            )
+        );
+    }
+
 
     public static MdDocument CreateTableMd(DocumentSet<MdDocument> set, Table table)
     {
@@ -99,6 +130,7 @@ class Program
             var columnTableHeader = new MdTableRow("Column", "Description", "Type");
             var columnTableRows = new List<MdTableRow>();
 
+            // TODO: create a "AddColumnMd" method using a column and returning a row
             foreach (var column in table.Columns)
             {
                 var columnName = column.Name;
