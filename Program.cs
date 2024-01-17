@@ -60,7 +60,7 @@ class Program
 
         readmeMd.Root.Add(tablesBulletList);
 
-        set.Save(docsFolderPath);
+        set.Save(docsFolderPath, cleanOutputDirectory: true);
     }
 
     public static MdDocument CreateReadmeMd(DocumentSet<MdDocument> set, Database database)
@@ -96,14 +96,15 @@ class Program
 
             document.Root.Add(new MdHeading("Columns", 2));
 
-            var columnTableHeader = new MdTableRow("Column", "Description");
+            var columnTableHeader = new MdTableRow("Column", "Description", "Type");
             var columnTableRows = new List<MdTableRow>();
 
             foreach (var column in table.Columns)
             {
-                var measureName = column.Name;
-                var measureDescription = column.Description;
-                columnTableRows.Add(new MdTableRow(measureName, measureDescription));
+                var columnName = column.Name;
+                var columnDataType = column.DataType.ToString();
+                var columnDescription = column.Description;
+                columnTableRows.Add(new MdTableRow(columnName, columnDescription, columnDataType));
             }
             document.Root.Add(new MdTable(columnTableHeader, columnTableRows));
         }
@@ -115,14 +116,15 @@ class Program
 
             document.Root.Add(new MdHeading("Measures", 2));
 
-            var measureTableHeader = new MdTableRow("Measure", "Description");
+            var measureTableHeader = new MdTableRow("Measure", "Description", "Expression");
             var measureTableRows = new List<MdTableRow>();
 
             foreach (var measure in table.Measures)
             {
                 var measureName = measure.Name;
+                var measureExpression = measure.Expression;
                 var measureDescription = measure.Description;
-                measureTableRows.Add(new MdTableRow(measureName, measureDescription));
+                measureTableRows.Add(new MdTableRow(measureName, measureDescription, measureExpression));
             }
             document.Root.Add(new MdTable(measureTableHeader, measureTableRows));
         }
