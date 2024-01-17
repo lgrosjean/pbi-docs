@@ -2,9 +2,9 @@
 
 ## Columns
 
-| Column       | Description |
-| ------------ | ----------- |
-| Date         |             |
-| Exchange     |             |
-| FromCurrency |             |
-| ToCurrency   |             |
+| Column       | Description | Type     |
+| ------------ | ----------- | -------- |
+| Date         |             | DateTime |
+| Exchange     |             | Double   |
+| FromCurrency |             | String   |
+| ToCurrency   |             | String   |

@@ -4,21 +4,21 @@ Date table
 
 ## Columns
 
-| Column              | Description |
-| ------------------- | ----------- |
-| Date                |             |
-| Day of Week Number  |             |
-| Day of Week Short   |             |
-| Day of Week         |             |
-| Month Number        |             |
-| Month Short         |             |
-| Month               |             |
-| Quarter             |             |
-| Working Day Number  |             |
-| Working Day         |             |
-| Year Month Number   |             |
-| Year Month Short    |             |
-| Year Month          |             |
-| Year Quarter Number |             |
-| Year Quarter        |             |
-| Year                |             |
+| Column              | Description | Type     |
+| ------------------- | ----------- | -------- |
+| Date                |             | DateTime |
+| Day of Week Number  |             | Int64    |
+| Day of Week Short   |             | String   |
+| Day of Week         |             | String   |
+| Month Number        |             | Int64    |
+| Month Short         |             | String   |
+| Month               |             | String   |
+| Quarter             |             | String   |
+| Working Day Number  |             | Int64    |
+| Working Day         |             | Boolean  |
+| Year Month Number   |             | Int64    |
+| Year Month Short    |             | String   |
+| Year Month          |             | String   |
+| Year Quarter Number |             | Int64    |
+| Year Quarter        |             | String   |
+| Year                |             | Int64    |
