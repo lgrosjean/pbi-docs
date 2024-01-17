@@ -1,9 +1,8 @@
 name: Build and publish a Docker image to ghcr.io
 on:
-
   # publish on releases, e.g. v2.1.13 (image tagged as "2.1.13" - "v" prefix is removed)
   release:
-    types: [ published ]
+    types: [published]
 
   # publish on pushes to the main branch (image tagged as "latest")
   push:
@@ -21,5 +20,5 @@ jobs:
       - name: Build and publish a Docker image for ${{ github.repository }}
         uses: macbre/push-to-ghcr@master
         with:
-          image_name: ${{ github.repository }}  # it will be lowercased internally
+          image_name: pbi-docs # it will be lowercased internally
           github_token: ${{ secrets.GITHUB_TOKEN }}
