@@ -65,7 +65,7 @@ docker run -it --rm -v $(pwd)/output:/App/output \
   -e PBI_CLIENT_ID=$PBI_CLIENT_ID \
   -e PBI_CLIENT_SECRET=$PBI_CLIENT_SECRET \
   ghcr.io/lgrosjean/pbi-docs \
-  output/ serialize -w "CORE - OPERATIONS [DEV]" -d "Core Dataset Activity Details lgrosjean [DEV]"
+  output/ serialize -w "WORKSPACE_NAME" -d "DATASET_NAME"
 ```
 ## Resources
 
