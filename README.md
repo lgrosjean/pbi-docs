@@ -24,9 +24,9 @@ Start by pulling the image locally
 docker pull ghcr.io/lgrosjean/pbi-docs:latest
 ```
 
-Then, in a shell:
+Then, in a shell, if your folder containg your TMDL structure is located in at `example/Model` path and you want to export the documentation to `example/docs` folder:
 ```sh
-docker run -it --rm -v $(pwd)/example:/App/example pbi-docs example/Model -d example/docs
+docker run -it --rm -v $(pwd)/example:/App/example ghcr.io/lgrosjean/pbi-docs:latest example/Model -d example/docs
 ```
 
 ## Resources

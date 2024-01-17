@@ -2,14 +2,14 @@
 
 ## Columns
 
-| Column        | Description |
-| ------------- | ----------- |
-| Close Date    |             |
-| Country       |             |
-| Name          |             |
-| Open Date     |             |
-| Square Meters |             |
-| State         |             |
-| Status        |             |
-| Store Code    |             |
-| StoreKey      |             |
+| Column        | Description | Type     |
+| ------------- | ----------- | -------- |
+| Close Date    |             | DateTime |
+| Country       |             | String   |
+| Name          |             | String   |
+| Open Date     |             | DateTime |
+| Square Meters |             | Int64    |
+| State         |             | String   |
+| Status        |             | String   |
+| Store Code    |             | Int64    |
+| StoreKey      |             | Int64    |
